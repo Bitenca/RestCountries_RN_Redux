@@ -12,10 +12,6 @@ import background from '../../background.jpg';
 import { Spinner } from './common/Spinner';
 
 class LoginForm extends Component {
-    static navigationOptions = {
-        header: null,
-      };
-
     onEmailChange(text) {
         this.props.emailChanged(text);
     }

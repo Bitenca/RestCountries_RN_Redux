@@ -1,12 +1,15 @@
 import axios from 'axios';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { 
     EMAIL_CHANGED,
     PASSWORD_CHANGED,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
-    LOGIN_USER_START
- } from './types';
+    LOGIN_USER_START,
+    FETCH_ALL_POSTS,
+    FETCH_POST
+, } from './types';
 
 const RequestURL = 'https://restcountries.eu/rest/v2/';
 
@@ -14,7 +17,7 @@ export const fetchAllPosts = () => {
     const request = axios.get(`${RequestURL}/all/`);
 
     return {
-        type: 'FETCH_ALL_POSTS',
+        type: FETCH_ALL_POSTS,
         payload: request
     };
 };
@@ -23,7 +26,7 @@ export const fetchPost = (name) => {
     const request = axios.get(`${RequestURL}/name/${name}`);
 
     return {
-        type: 'FETCH_POST',
+        type: FETCH_POST,
         payload: request
     };
 };
@@ -65,6 +68,8 @@ const loginUserSuccess = (dispatch, user) => {
         type: LOGIN_USER_SUCCESS,
         payload: user
     });
+
+    Actions.main();
 };
 
 const loginUserFail = (dispatch) => {

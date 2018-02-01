@@ -1,38 +1,34 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button,
-Icon, Text, Body, Right, Title
+Icon, Text, Body, Right, Title, Item, Input
  } from 'native-base';
 
 export default class Home extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                <Body>
-                    <Title>Rest Countries</Title>
-                </Body>
-                <Right>
-                    <Button danger onPress={() => null}>
-                    <Text>Sair</Text>
+                <Header searchBar rounded>
+                    <Item>
+                        <Icon name="ios-search" />
+                        <Input placeholder="Pesquisar" />
+                    <Button transparent>
+                        <Icon name="arrow-round-forward" />
                     </Button>
-                </Right>
+                    </Item>
                 </Header>
                 <Content />
                 <Footer>
-                <FooterTab>
-                    <Button vertical>
-                    <Icon name="apps" />
-                    <Text>Todos os Países</Text>
+                    <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
+                    <Button active>
+                        <Icon active name="apps" />
                     </Button>
-                    <Button vertical>
-                    <Icon name="search" />
-                    <Text>Pesquisar</Text>
+                    <Button>
+                        <Icon name="star" />
                     </Button>
-                    <Button vertical active>
-                    <Icon active name="star" />
-                    <Text>Meus Países</Text>
+                    <Button>
+                        <Icon name="person" />
                     </Button>
-                </FooterTab>
+                    </FooterTab>
                 </Footer>
             </Container>
             );
