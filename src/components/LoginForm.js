@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { 
     Container, Content, Form, Item, Input, Thumbnail, 
-    Button, Text, H2, Card, Body, CardItem, Footer
+    Button, Text, H2, Card, Body, CardItem, Header
 } from 'native-base';
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser, registerUser } from '../actions';
 
+import { emailChanged, passwordChanged, loginUser, registerUser } from '../actions';
 import { styles } from './LoginStyles';
 import background from '../../background.jpg';
+import { Spinner } from './common/Spinner';
 
 class LoginForm extends Component {
     static navigationOptions = {
@@ -27,7 +28,6 @@ class LoginForm extends Component {
         const { email, password } = this.props;
 
         this.props.loginUser({ email, password });
-        console.log(email, password);
     }
 
     onButtonRegisterPress() {
@@ -42,12 +42,44 @@ class LoginForm extends Component {
         }
     }
 
+    renderButton() {
+        if (this.props.loading) {
+            return <Spinner />;
+        }
+        return (
+            <Form style={styles.layoutStyle}>
+                <Button 
+                style={styles.buttonStyle} 
+                onPress={this.onButtonLoginPress.bind(this)}
+                >
+                    <Text>
+                        Login
+                    </Text>
+                </Button>
+
+                <Button 
+                success 
+                style={styles.buttonStyle} 
+                onPress={this.onButtonRegisterPress.bind(this)}
+                >
+                    <Text>
+                        Registrar
+                    </Text>
+                </Button>
+            </Form>
+        );
+    }
+
     render() {
-        const { inputStyle, h2Style, footerTextStyle, buttonStyle, layoutStyle,
+        const { inputStyle, h2Style, layoutStyle, headerStyle,
         contentContainerStyle, backgroundImage } = styles;
         return (
             <ImageBackground style={backgroundImage} source={background}>
             <Container>
+                <Header style={headerStyle}>
+                <Text style={styles.footerTextStyle} >Nota: Para registrar um novo usuário, 
+                basta inserir as credenciais e selecionar o botão de "Registrar"! </Text>
+                </Header>
                 <Content contentContainerStyle={contentContainerStyle}>
                 <Form style={inputStyle}>
                     <Thumbnail 
@@ -98,31 +130,10 @@ class LoginForm extends Component {
                 </Text>
 
                 <Form style={layoutStyle}>
-                    <Button 
-                    style={buttonStyle} 
-                    onPress={this.onButtonLoginPress.bind(this)}
-                    >
-                        <Text>
-                            Login
-                        </Text>
-                    </Button>
-
-                    <Button 
-                    success 
-                    style={buttonStyle} 
-                    onPress={this.onButtonRegisterPress.bind(this)}
-                    >
-                        <Text>
-                            Registrar
-                        </Text>
-                    </Button>
+                    {this.renderButton()}
                 </Form>
 
                 </Content>
-                <Footer style={{ backgroundColor: 'transparent' }}>
-                    <Text style={footerTextStyle} >Nota: Para registrar um novo usuário, 
-                    basta inserir as credenciais e selecionar o botão de "Registrar"! </Text>
-                </Footer>
             </Container>
         </ImageBackground>
         );
@@ -130,11 +141,9 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        email: state.auth.email,
-        password: state.auth.password,
-        error: state.auth.error
-    };
+    const { email, password, error, loading } = state.auth;
+
+    return { email, password, error, loading };
 };
 
 export default connect(mapStateToProps, { 

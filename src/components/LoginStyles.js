@@ -42,6 +42,12 @@ export const styles = {
         textAlign: 'center', 
         color: 'white',
         textShadowColor: 'black', 
-        textShadowOffset: { width: 2, height: 2 } 
+        textShadowOffset: { width: 2, height: 2 },
+        padding: 5
     },
+    headerStyle: {
+        backgroundColor: 'transparent', 
+        paddingTop: 10, 
+        minHeight: '11%'
+    }
 };
