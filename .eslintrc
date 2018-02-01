@@ -1,0 +1,15 @@
+{
+    "extends": "rallycoding",
+    "rules": {
+        "react/require-extension": "off",
+        "arrow-body-style":"off"
+    },
+    "globals": {
+        "document": true,
+        "foo": true,
+        "window": true
+      }
+    
+}
+    
+   
