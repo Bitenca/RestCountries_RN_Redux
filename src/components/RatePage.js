@@ -2,13 +2,67 @@ import React, { Component } from 'react';
 import { 
     Container, Content, List, ListItem, Footer, FooterTab, Button, Icon,
     Left, Body, Right, Thumbnail, Text } from 'native-base';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Image from 'react-native-remote-svg';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { fetchPost } from '../actions';
+import { Spinner } from './common/Spinner';
 
 
 class RatePage extends Component {
+    componentDidMount() {
+        this.props.fetchPost(this.props.postId);
+    }
+
+    navigation(data) {
+        switch (data) {
+            case 'userCountries':
+                return Actions.userCountries();
+            case 'userPage':
+                return Actions.userPage();
+            case 'homePage':
+                return Actions.home();
+            default:
+                return 0; 
+            }
+      }
+
+    loadingPosts(post) {
+        if (post) {
+            const postItems = post.data.map((pos, i) => {
+                return (
+                    <TouchableOpacity key={i}>
+                    <Image 
+                    style={{ flex: 1,
+                    height: 200,
+                    width: '100%',
+                    }}
+                    source={{ uri: pos.flag }}
+                    />
+                    <Text>{pos.name}</Text>
+                    </TouchableOpacity>
+                 );   
+            });
+    
+            return (
+                <ScrollView>
+                    {postItems}
+                </ScrollView>
+            );  
+        }
+
+         return <Spinner />;
+     }
+
     render() {
+        const { post } = this.props;
+        console.log(post);
         return (
             <Container>
         <Content>
+        {this.loadingPosts(post)}
           <List>
             <ListItem avatar>
               <Left>
@@ -28,20 +82,27 @@ class RatePage extends Component {
         </Content>
         <Footer>
         <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
-          <Button>
-            <Icon name="apps" onPress={null} />
-          </Button>
-          <Button active>
+        <Button onPress={() => this.navigation('homePage')}>
+            <Icon name="apps" />
+        </Button>
+        <Button disabled>
             <Icon active name="star" />
-          </Button>
-          <Button>
+        </Button>
+        <Button onPress={() => this.navigation('userPage')}>
             <Icon name="person" />
-          </Button>
+        </Button>
         </FooterTab>
       </Footer>
       </Container>
         );
     }
 }
+const mapStateToProps = (state) => {
+    return { post: state.posts.selected };
+};
 
-export default RatePage;
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchPost }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RatePage);

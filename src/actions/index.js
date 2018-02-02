@@ -35,11 +35,13 @@ export const fetchAllPosts = () => {
     };
 };
 
-
 export const fetchPost = (name) => {
+    console.log(name);
+    const request = `https://restcountries.eu/rest/v2/name/${name}`;
+    console.log(request);
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
-        axios.get(`https://restcountries.eu/rest/v2/name/${name}`)
+        axios.get(request)
         .then((response) => dispatch({
                 type: FETCH_POST,
                 payload: response
@@ -64,10 +66,6 @@ export const registerUser = ({ email, password }) => {
         .then(user => loginUserSuccess(dispatch, user))
         .catch((error) => { loginUserFail(dispatch); console.log(error); });
     };
-};
-
-export const userNavigate = () => {
-    Actions.userCountries();
 };
 
 const requestSuccess = (dispatch, response) => {

@@ -12,7 +12,7 @@ export const SingleItem = ({ item, onItemPress }) => {
 
         return (
             <TouchableOpacity 
-                onPress={() => onItemPress(name)}
+                onPress={() => onItemPress(name.toString())}
             >
                 <List>
                 <ListItem avatar>{/*

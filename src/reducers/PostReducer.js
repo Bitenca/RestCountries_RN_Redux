@@ -1,7 +1,6 @@
 import { 
     FETCH_POST,
-    FETCH_ALL_POSTS,
-    USER_NAVIGATE
+    FETCH_ALL_POSTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,9 +14,7 @@ export default (state = {}, action) => {
         case FETCH_ALL_POSTS:
             return { ...state, all: action.payload };
         case FETCH_POST:
-            return { ...state, selected: action.payload.data };
-        case USER_NAVIGATE:
-            return { ...state };
+            return { ...state, selected: action.payload };
         default:
             return state;
     }
