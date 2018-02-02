@@ -7,9 +7,8 @@ import { connect } from 'react-redux';
 import Image from 'react-native-remote-svg';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { fetchPost } from '../actions';
-import { Spinner } from './common/Spinner';
-
+import { fetchPost } from '../../actions';
+import { Spinner } from '../common/Spinner';
 
 class RatePage extends Component {
     componentDidMount() {

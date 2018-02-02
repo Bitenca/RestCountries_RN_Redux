@@ -6,8 +6,8 @@ import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
-import { fetchAllPosts } from '../actions';
-import { Spinner } from './common/Spinner';
+import { fetchAllPosts } from '../../actions';
+import { Spinner } from '../common/Spinner';
 import { SingleItem } from './SingleItem';
 
 class Home extends Component {

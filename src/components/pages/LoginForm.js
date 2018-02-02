@@ -6,10 +6,10 @@ import {
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 
-import { emailChanged, passwordChanged, loginUser, registerUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, registerUser } from '../../actions';
 import { styles } from './LoginStyles';
-import background from '../../background.jpg';
-import { Spinner } from './common/Spinner';
+import background from '../../../background.jpg';
+import { Spinner } from '../common/Spinner';
 
 class LoginForm extends Component {
     onEmailChange(text) {

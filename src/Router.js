@@ -1,10 +1,10 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import LoginForm from './components/LoginForm';
-import Home from './components/Home';
-import UserPage from './components/UserAccount';
-import UserCountries from './components/UserCountries';
-import RatePage from './components/RatePage';
+import LoginForm from './components/pages/LoginForm';
+import Home from './components/pages/Home';
+import UserPage from './components/pages/UserAccount';
+import UserCountries from './components/pages/UserCountries';
+import RatePage from './components/pages/RatePage';
 
 const RouterComponent = () => {
     return (
