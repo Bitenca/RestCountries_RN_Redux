@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Actions, ActionConst } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { 
     EMAIL_CHANGED,
@@ -8,22 +8,12 @@ import {
     LOGIN_USER_FAIL,
     LOGIN_USER_START,
     FETCH_ALL_POSTS,
-    FETCH_POST
+    FETCH_POST,
+    REQUEST_START
 , } from './types';
 
-const RequestURL = 'https://restcountries.eu/rest/v2/';
-
-export const fetchAllPosts = () => {
-    const request = axios.get(`${RequestURL}/all/`);
-
-    return {
-        type: FETCH_ALL_POSTS,
-        payload: request
-    };
-};
-
 export const fetchPost = (name) => {
-    const request = axios.get(`${RequestURL}/name/${name}`);
+    const request = axios.get(`/name/${name}`);
 
     return {
         type: FETCH_POST,
@@ -45,6 +35,15 @@ export const passwordChanged = (text) => {
     };
 };
 
+export const fetchAllPosts = () => {
+    return (dispatch) => {
+        dispatch({ type: REQUEST_START });
+        axios.get('https://restcountries.eu/rest/v2/all/')
+        .then((response) => requestSuccess(dispatch, response))
+        .catch((error) => console.log(error));
+    };
+};
+
 export const loginUser = ({ email, password }) => {
     return (dispatch) => {
         dispatch({ type: LOGIN_USER_START });
@@ -61,6 +60,13 @@ export const registerUser = ({ email, password }) => {
         .then(user => loginUserSuccess(dispatch, user))
         .catch((error) => { loginUserFail(dispatch); console.log(error); });
     };
+};
+
+const requestSuccess = (dispatch, response) => {
+    dispatch({
+        type: FETCH_ALL_POSTS,
+        payload: response
+    });
 };
 
 const loginUserSuccess = (dispatch, user) => {

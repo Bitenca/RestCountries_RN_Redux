@@ -12,3 +12,5 @@ export const FETCH_ALL_POSTS = 'fetch_all_posts';
 
 export const FETCH_POST = 'fetch_posts';
 
+export const REQUEST_START = 'request_start';
+

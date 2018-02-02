@@ -1,10 +1,42 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Footer, FooterTab, Button,
-Icon, Text, Body, Right, Title, Item, Input
+Icon, Item, Input
  } from 'native-base';
+import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import { fetchAllPosts } from '../actions';
+import { Spinner } from './common/Spinner';
+import { SingleItem } from './SingleItem';
 
-export default class Home extends Component {
+class Home extends Component {
+    componentDidMount() {
+        this.props.fetchAllPosts();
+    }
+
+    onItemPress(id) {
+        Actions.ratePage({ id });
+    }
+
+    loadingPosts(posts) {
+       if (posts) {
+        const postItems = posts.data.map((post, i) => {
+            return (<SingleItem key={i} item={post} onItemPress={this.onItemPress} />);
+        });
+
+        return (
+            <ScrollView>
+                {postItems}
+            </ScrollView>
+        );   
+    }
+        return (<Spinner />);
+    }
+
+
     render() {
+        const { posts } = this.props;
         return (
             <Container>
                 <Header searchBar rounded>
@@ -16,7 +48,9 @@ export default class Home extends Component {
                     </Button>
                     </Item>
                 </Header>
-                <Content />
+                <Content>
+                    {this.loadingPosts(posts)}
+                </Content>
                 <Footer>
                     <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
                     <Button active>
@@ -35,3 +69,12 @@ export default class Home extends Component {
         }
     }
 
+const mapStateToProps = (state) => {
+    return { posts: state.posts.all };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ fetchAllPosts }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
