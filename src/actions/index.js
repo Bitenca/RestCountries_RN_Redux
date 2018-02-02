@@ -66,6 +66,10 @@ export const registerUser = ({ email, password }) => {
     };
 };
 
+export const userNavigate = () => {
+    Actions.userCountries();
+};
+
 const requestSuccess = (dispatch, response) => {
     dispatch({
         type: FETCH_ALL_POSTS,

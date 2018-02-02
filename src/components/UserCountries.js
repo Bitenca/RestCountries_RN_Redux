@@ -5,6 +5,18 @@ Left, Body, Right, Thumbnail, Text } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 export default class UserCountries extends Component {
+  navigation(data) {
+    switch (data) {
+        case 'userCountries':
+            return Actions.userCountries();
+        case 'userPage':
+            return Actions.userPage();
+        case 'homePage':
+            return Actions.home();
+        default:
+            return 0; 
+        }
+  }
   render() {
     return (
       <Container>
@@ -28,15 +40,15 @@ export default class UserCountries extends Component {
         </Content>
         <Footer>
         <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
-          <Button>
-            <Icon name="apps" onPress={null} />
-          </Button>
-          <Button active>
-            <Icon active name="star" />
-          </Button>
-          <Button>
+        <Button onPress={() => this.navigation('homePage')}>
+            <Icon active name="apps" />
+        </Button>
+        <Button disabled>
+            <Icon name="star" />
+        </Button>
+        <Button onPress={() => this.navigation('userPage')}>
             <Icon name="person" />
-          </Button>
+        </Button>
         </FooterTab>
       </Footer>
       </Container>

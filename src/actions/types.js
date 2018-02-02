@@ -14,3 +14,4 @@ export const FETCH_POST = 'fetch_posts';
 
 export const REQUEST_START = 'request_start';
 
+export const USER_NAVIGATE = 'user_navigate';

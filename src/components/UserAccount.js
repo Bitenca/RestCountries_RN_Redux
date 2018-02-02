@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, Footer, FooterTab,
 Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 export default class UserAccount extends Component {
+  navigation(data) {
+    switch (data) {
+        case 'userCountries':
+            return Actions.userCountries();
+        case 'userPage':
+            return Actions.userPage();
+        case 'homePage':
+            return Actions.home();
+        default:
+            return 0; 
+        }
+  }
+
     render() {
         return (
         <Container>
@@ -36,15 +50,15 @@ export default class UserAccount extends Component {
         </Content>
         <Footer>
         <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
-          <Button>
-            <Icon name="apps" />
-          </Button>
-          <Button>
+        <Button onPress={() => this.navigation('homePage')}>
+            <Icon active name="apps" />
+        </Button>
+        <Button onPress={() => this.navigation('userCountries')}>
             <Icon name="star" />
-          </Button>
-          <Button active>
-            <Icon active name="person" />
-          </Button>
+        </Button>
+        <Button disabled>
+            <Icon name="person" />
+        </Button>
         </FooterTab>
       </Footer>
       </Container>

@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
-import { fetchAllPosts } from '../actions';
+import { fetchAllPosts, userNavigate } from '../actions';
 import { Spinner } from './common/Spinner';
 import { SingleItem } from './SingleItem';
 
@@ -17,6 +17,19 @@ class Home extends Component {
 
     onItemPress(name) {
         Actions.ratePage({ name });
+    }
+
+    navigation(data) {
+        switch (data) {
+            case 'userCountries':
+                return Actions.userCountries();
+            case 'userPage':
+                return Actions.userPage();
+            case 'homePage':
+                return Actions.home();
+            default:
+                return 0; 
+            }
     }
 
     loadingPosts(posts) {
@@ -56,10 +69,10 @@ class Home extends Component {
                     <Button disabled>
                         <Icon active name="apps" />
                     </Button>
-                    <Button onPress={Actions.userCountries()}>
+                    <Button onPress={() => this.navigation('userCountries')}>
                         <Icon name="star" />
                     </Button>
-                    <Button>
+                    <Button onPress={() => this.navigation('userPage')}>
                         <Icon name="person" />
                     </Button>
                     </FooterTab>
@@ -74,7 +87,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchAllPosts }, dispatch);
+    return bindActionCreators({ fetchAllPosts, userNavigate }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

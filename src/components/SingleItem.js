@@ -15,19 +15,18 @@ export const SingleItem = ({ item, onItemPress }) => {
                 onPress={() => onItemPress(name)}
             >
                 <List>
-                <ListItem avatar>
+                <ListItem avatar>{/*
                 <Left>
-                <Form style={{ justifyContent: 'center', alignItems: 'center' }}>
+                <Form>
                     <Image 
-                    key={capital}
-                    style={{ flex: 1,
+                        style={{ flex: 3,
                         height: 50,
                         width: 150, 
                     }}
                     source={{ uri: flag }}
                     />
                 </Form>
-                </Left>
+                </Left>*/}
                 <Body>
                     <Text>{name}</Text>
                     <Text note>Localidade Regional: {region}</Text>
