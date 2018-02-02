@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { 
 Container, Content, List, ListItem, Footer, FooterTab, Button, Icon,
 Left, Body, Right, Thumbnail, Text } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 export default class UserCountries extends Component {
   render() {
@@ -28,7 +29,7 @@ export default class UserCountries extends Component {
         <Footer>
         <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
           <Button>
-            <Icon name="apps" />
+            <Icon name="apps" onPress={null} />
           </Button>
           <Button active>
             <Icon active name="star" />

@@ -1,6 +1,6 @@
 import { 
     FETCH_POST,
-    FETCH_ALL_POSTS
+    FETCH_ALL_POSTS,
 } from '../actions/types';
 
 const INITIAL_STATE = {

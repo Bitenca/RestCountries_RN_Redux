@@ -9,17 +9,8 @@ import {
     LOGIN_USER_START,
     FETCH_ALL_POSTS,
     FETCH_POST,
-    REQUEST_START
-, } from './types';
-
-export const fetchPost = (name) => {
-    const request = axios.get(`/name/${name}`);
-
-    return {
-        type: FETCH_POST,
-        payload: request
-    };
-};
+    REQUEST_START,
+ } from './types';
 
 export const emailChanged = (text) => {
     return {
@@ -38,8 +29,21 @@ export const passwordChanged = (text) => {
 export const fetchAllPosts = () => {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
-        axios.get('https://restcountries.eu/rest/v2/all/')
+        axios.get('https://restcountries.eu/rest/v2/name/united')
         .then((response) => requestSuccess(dispatch, response))
+        .catch((error) => console.log(error));
+    };
+};
+
+
+export const fetchPost = (name) => {
+    return (dispatch) => {
+        dispatch({ type: REQUEST_START });
+        axios.get(`https://restcountries.eu/rest/v2/name/${name}`)
+        .then((response) => dispatch({
+                type: FETCH_POST,
+                payload: response
+        }))
         .catch((error) => console.log(error));
     };
 };

@@ -15,8 +15,8 @@ class Home extends Component {
         this.props.fetchAllPosts();
     }
 
-    onItemPress(id) {
-        Actions.ratePage({ id });
+    onItemPress(name) {
+        Actions.ratePage({ name });
     }
 
     loadingPosts(posts) {
@@ -53,10 +53,10 @@ class Home extends Component {
                 </Content>
                 <Footer>
                     <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
-                    <Button active>
+                    <Button disabled>
                         <Icon active name="apps" />
                     </Button>
-                    <Button>
+                    <Button onPress={Actions.userCountries()}>
                         <Icon name="star" />
                     </Button>
                     <Button>
