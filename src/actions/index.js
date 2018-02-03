@@ -10,6 +10,7 @@ import {
     FETCH_ALL_POSTS,
     FETCH_POST,
     REQUEST_START,
+    SEARCH_START
  } from './types';
 
 export const emailChanged = (text) => {
@@ -26,19 +27,28 @@ export const passwordChanged = (text) => {
     };
 };
 
+export const searchStart = (text) => {
+    return {
+        type: SEARCH_START,
+        payload: text
+    };
+};
+
 export const fetchAllPosts = () => {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
-        axios.get('https://restcountries.eu/rest/v2/name/united')
+        axios.get('https://restcountries.eu/rest/v2/all')
         .then((response) => requestSuccess(dispatch, response))
         .catch((error) => console.log(error));
     };
 };
 
 export const fetchPost = (name) => {
-    console.log(name);
+    if (name === '') {
+        return null;
+    }
+    
     const request = `https://restcountries.eu/rest/v2/name/${name}`;
-    console.log(request);
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
         axios.get(request)
