@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { 
     Container, Content, List, ListItem, Footer, FooterTab, Button, Icon,
-    Left, Body, Right, Thumbnail, Text } from 'native-base';
+    Left, Body, Right, Thumbnail, Text, H1 } from 'native-base';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Image from 'react-native-remote-svg';
@@ -33,6 +33,7 @@ class RatePage extends Component {
             const postItems = post.data.map((pos, i) => {
                 return (
                     <TouchableOpacity key={i}>
+                    <H1>{pos.name}</H1>
                     <Image 
                     style={{ flex: 1,
                     height: 200,
@@ -80,7 +81,7 @@ class RatePage extends Component {
           </List>
         </Content>
         <Footer>
-        <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
+        <FooterTab style={{ backgroundColor: '#043c96' }}>
         <Button onPress={() => this.navigation('homePage')}>
             <Icon name="apps" />
         </Button>

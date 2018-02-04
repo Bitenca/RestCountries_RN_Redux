@@ -82,7 +82,7 @@ class LoginForm extends Component {
                     large source={{ uri: 'https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAgZAAAAJDY3M2NlMTE1LWMwNmMtNGU4OS1iNmIwLWM4OGE0YjE2N2NkNw.png' }}
                     />
                     <H2 style={h2Style}>
-                        Rest Countries - Avalie!
+                        Rest Countries - Avalie Países!
                     </H2>
                 </Form>
 

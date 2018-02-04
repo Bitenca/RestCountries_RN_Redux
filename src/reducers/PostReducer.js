@@ -1,7 +1,8 @@
 import { 
     FETCH_POST,
     FETCH_ALL_POSTS,
-    SEARCH_START
+    SEARCH_START,
+    RESET_SEARCH
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -20,6 +21,8 @@ export default (state = {}, action) => {
             return { ...state, selected: action.payload, search: action.payload };
         case SEARCH_START:
             return { ...state, name: action.payload };
+        case RESET_SEARCH:
+            return { ...state, name: '' };
         default:
             return state;
     }

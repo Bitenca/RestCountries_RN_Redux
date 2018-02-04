@@ -15,7 +15,7 @@ const styles = {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: '30%'
+        paddingTop: '50%'
     }
 };
 

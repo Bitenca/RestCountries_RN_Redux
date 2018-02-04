@@ -49,7 +49,7 @@ export default class UserAccount extends Component {
           </Card>
         </Content>
         <Footer>
-        <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
+        <FooterTab style={{ backgroundColor: '#043c96' }}>
         <Button onPress={() => this.navigation('homePage')}>
             <Icon active name="apps" />
         </Button>

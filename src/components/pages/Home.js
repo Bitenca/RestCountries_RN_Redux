@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
-import { fetchAllPosts, fetchPost, searchStart } from '../../actions';
+import { fetchAllPosts, fetchPost, searchStart, resetSearch } from '../../actions';
 import { Spinner } from '../common/Spinner';
 import { SingleItem } from './SingleItem';
 
@@ -19,11 +19,19 @@ class Home extends Component {
         Actions.ratePage({ postId: name });
     }
 
-    onSearch(name) {
-        this.props.searchStart(name);
+    onButtonSearchPress() {
+        const { name } = this.props;
         this.props.fetchPost(name);
         this.loadingPosts(this.props.search);
-        console.log(this.props.search);
+    }
+
+    searchTermChange(term) {
+        /*if (term === '') {
+            this.props.resetSearch();
+            this.loadingPosts(this.props.posts); 
+            // if search bar is empty render all countries
+        }*/
+        this.props.searchStart(term);
     }
 
     navigation(data) {
@@ -40,25 +48,6 @@ class Home extends Component {
     }
 
     loadingPosts(posts) {
-        if (!this.props.search) {
-            if (posts) {
-                const postItems = posts.data.map((post, i) => {
-                    return (<SingleItem key={i} item={post} onItemPress={this.onItemPress} />);
-                });
-
-                return (
-                    <ScrollView>
-                        {postItems}
-                    </ScrollView>
-                );   
-            }
-                return (<Spinner />);
-            }
-
-        return null;
-    }
-
-    searchingPosts(posts) {
         if (posts) {
             const postItems = posts.data.map((post, i) => {
                 return (<SingleItem key={i} item={post} onItemPress={this.onItemPress} />);
@@ -70,29 +59,39 @@ class Home extends Component {
                 </ScrollView>
             );   
         }
-            return null;
+
+        return (<Spinner />);
+    }
+
+    renderCountries(posts, search) {
+        if (search) {
+            return this.loadingPosts(search);
+        }
+        return this.loadingPosts(posts);
     }
 
     render() {
-        const { posts } = this.props;
+        const { posts, name, search } = this.props;
         return (
             <Container>
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
                         <Input 
-                        value={this.props.name}
-                        onChangeText={this.onSearch.bind(this)}
+                        value={name}
+                        onChangeText={this.searchTermChange.bind(this)}
                         placeholder="Pesquisar" 
                         />
+                        <Button transparent iconRight onPress={this.onButtonSearchPress.bind(this)}>
+                            <Icon name='arrow-forward' />
+                        </Button>
                     </Item>
                 </Header>
                 <Content>
-                    {this.loadingPosts(posts)}
-                    {this.searchingPosts(this.props.search)}
+                    {this.renderCountries(posts, search)}
                 </Content>
                 <Footer>
-                    <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
+                    <FooterTab style={{ backgroundColor: '#043c96' }}>
                     <Button disabled>
                         <Icon active name="apps" />
                     </Button>
@@ -117,7 +116,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchAllPosts, fetchPost, searchStart }, dispatch);
+    return bindActionCreators({ fetchAllPosts, fetchPost, searchStart, resetSearch }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

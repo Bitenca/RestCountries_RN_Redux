@@ -39,7 +39,7 @@ export default class UserCountries extends Component {
           </List>
         </Content>
         <Footer>
-        <FooterTab style={{ backgroundColor: 'darkslateblue' }}>
+        <FooterTab style={{ backgroundColor: '#043c96' }}>
         <Button onPress={() => this.navigation('homePage')}>
             <Icon name="apps" />
         </Button>
