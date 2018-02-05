@@ -2,7 +2,7 @@ export const styles = {
     contentContainerStyle: {
         flex: 1,
         justifyContent: 'center',
-        marginHorizontal: 40 
+        marginHorizontal: 40
     },
     inputStyle: {
         justifyContent: 'center',
@@ -23,31 +23,31 @@ export const styles = {
         height: '100%',
         justifyContent: 'center',
     },
-    h2Style: { 
-        textAlign: 'center', 
-        margin: 15, 
+    h2Style: {
+        textAlign: 'center',
+        margin: 15,
         color: 'white',
-        textShadowColor: 'black', 
-        textShadowOffset: { width: 2, height: 2 } 
+        textShadowColor: 'black',
+        textShadowOffset: { width: 2, height: 2 }
     },
     errorMessage: {
         color: 'red',
         fontSize: 18,
         alignSelf: 'center',
         padding: 5,
-        textShadowColor: 'grey', 
-        textShadowOffset: { width: 1, height: 0 } 
+        textShadowColor: 'grey',
+        textShadowOffset: { width: 1, height: 0 }
     },
-    footerTextStyle: { 
-        textAlign: 'center', 
+    footerTextStyle: {
+        textAlign: 'center',
         color: 'white',
-        textShadowColor: 'black', 
+        textShadowColor: 'black',
         textShadowOffset: { width: 2, height: 2 },
         padding: 5
     },
     headerStyle: {
-        backgroundColor: 'transparent', 
-        paddingTop: 10, 
+        backgroundColor: 'transparent',
+        paddingTop: 10,
         minHeight: '11%'
     }
 };

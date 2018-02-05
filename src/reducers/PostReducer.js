@@ -1,4 +1,4 @@
-import { 
+import {
     FETCH_POST,
     FETCH_ALL_POSTS,
     SEARCH_START,

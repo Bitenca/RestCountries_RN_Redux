@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Footer, FooterTab, Button,
-Icon, Item, Input
- } from 'native-base';
+import {
+    Container, Header, Content, Footer, FooterTab, Button,
+    Icon, Item, Input
+} from 'native-base';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -28,7 +29,7 @@ class Home extends Component {
     searchTermChange(term) {
         if (this.props.name === '') {
             this.props.fetchAllPosts();
-            this.loadingPosts(this.props.posts); 
+            this.loadingPosts(this.props.posts);
             // if search bar is empty render all countries
         }
         this.props.searchStart(term);
@@ -43,8 +44,8 @@ class Home extends Component {
             case 'homePage':
                 return Actions.home();
             default:
-                return 0; 
-            }
+                return 0;
+        }
     }
 
     loadingPosts(posts) {
@@ -57,7 +58,7 @@ class Home extends Component {
                 <ScrollView>
                     {postItems}
                 </ScrollView>
-            );   
+            );
         }
 
         return (<Spinner />);
@@ -78,10 +79,10 @@ class Home extends Component {
                 <Header searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input 
-                        value={name}
-                        onChangeText={this.searchTermChange.bind(this)}
-                        placeholder="Pesquisar" 
+                        <Input
+                            value={name}
+                            onChangeText={this.searchTermChange.bind(this)}
+                            placeholder="Pesquisar"
                         />
                         <Button transparent iconRight onPress={this.onButtonSearchPress.bind(this)}>
                             <Icon name='arrow-forward' />
@@ -93,27 +94,28 @@ class Home extends Component {
                 </Content>
                 <Footer>
                     <FooterTab style={{ backgroundColor: '#043c96' }}>
-                    <Button disabled>
-                        <Icon active name="apps" />
-                    </Button>
-                    <Button onPress={() => this.navigation('userCountries')}>
-                        <Icon name="star" />
-                    </Button>
-                    <Button onPress={() => this.navigation('userPage')}>
-                        <Icon name="person" />
-                    </Button>
+                        <Button disabled>
+                            <Icon active name="apps" />
+                        </Button>
+                        <Button onPress={() => this.navigation('userCountries')}>
+                            <Icon name="star" />
+                        </Button>
+                        <Button onPress={() => this.navigation('userPage')}>
+                            <Icon name="person" />
+                        </Button>
                     </FooterTab>
                 </Footer>
             </Container>
-            );
-        }
+        );
     }
+}
 
 const mapStateToProps = (state) => {
-    return { posts: state.posts.all, 
+    return {
+        posts: state.posts.all,
         search: state.posts.search,
         name: state.posts.name
-     };
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {

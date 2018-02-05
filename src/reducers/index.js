@@ -5,8 +5,8 @@ import AvailReducer from './AvailReducer';
 import CountryReducer from './CountryReducer';
 
 export default combineReducers({
-   auth: AuthReducer,
-   posts: PostReducer,
-   avail: AvailReducer,
-   countries: CountryReducer
+    auth: AuthReducer,
+    posts: PostReducer,
+    avail: AvailReducer,
+    countries: CountryReducer
 });

@@ -11,7 +11,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, [action.payload.prop]: action.payload.value };
         case USER_FETCH_SUCCESS:
             return { ...state, email: action.payload };
-        default: 
+        default:
             return state;
     }
 };

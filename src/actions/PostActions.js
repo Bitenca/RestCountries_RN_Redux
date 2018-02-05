@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { 
+import {
     FETCH_ALL_POSTS,
     FETCH_POST,
     REQUEST_START,
     SEARCH_START,
-    RESET_SEARCH 
- } from './types';
+    RESET_SEARCH
+} from './types';
 
 export const searchStart = (text) => {
     return {
@@ -24,8 +24,8 @@ export const fetchAllPosts = () => {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
         axios.get('https://restcountries.eu/rest/v2/name/ba')
-        .then((response) => requestSuccess(dispatch, response))
-        .catch((error) => console.log(error));
+            .then((response) => requestSuccess(dispatch, response))
+            .catch((error) => console.log(error));
     };
 };
 
@@ -34,11 +34,11 @@ export const fetchPost = (name) => {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
         axios.get(request)
-        .then((response) => dispatch({
+            .then((response) => dispatch({
                 type: FETCH_POST,
                 payload: response
-        }))
-        .catch((error) => console.log(error));
+            }))
+            .catch((error) => console.log(error));
     };
 };
 

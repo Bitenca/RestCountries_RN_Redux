@@ -13,11 +13,11 @@ export const availUpdate = ({ prop, value }) => {
 export const availCreate = ({ rate, name, flag }) => {
     const { currentUser } = firebase.auth();
     console.log(rate, name, flag);
-    
+
     return () => {
         firebase.database().ref(`/users/${currentUser.uid}/countries`)
-        .push({ rate, name, flag })
-        .then(() => Actions.pop());
+            .push({ rate, name, flag })
+            .then(() => Actions.pop());
     };
 };
 
@@ -25,20 +25,22 @@ export const availFetch = () => {
     const { currentUser } = firebase.auth();
     return (dispatch) => {
         firebase.database().ref(`/users/${currentUser.uid}/countries`)
-        .on('value', snapshot => {
-            dispatch({ 
-                type: AVAIL_FETCH_SUCCESS, 
-                payload: snapshot.val() });
-        });
+            .on('value', snapshot => {
+                dispatch({
+                    type: AVAIL_FETCH_SUCCESS,
+                    payload: snapshot.val()
+                });
+            });
     };
 };
 
 export const userFetch = () => {
     const { currentUser } = firebase.auth();
     return (dispatch) => {
-            dispatch({ 
-                type: USER_FETCH_SUCCESS, 
-                payload: currentUser.email });
+        dispatch({
+            type: USER_FETCH_SUCCESS,
+            payload: currentUser.email
+        });
     };
 };
 
