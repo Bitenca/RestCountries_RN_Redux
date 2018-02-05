@@ -7,12 +7,23 @@ import { connect } from 'react-redux';
 import Image from 'react-native-remote-svg';
 import { ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { fetchPost, availUpdate } from '../../actions';
+import { fetchPost, availUpdate, availCreate } from '../../actions';
 import { Spinner } from '../common/Spinner';
 
 class RatePage extends Component {
     componentDidMount() {
         this.props.fetchPost(this.props.postId);
+    }
+
+    onSubmitAvail(rate) {
+        const { post } = this.props;
+        console.log(rate, post);
+        
+
+        post.data.map((pos) => {
+            const { name, flag } = pos;
+            return this.props.availCreate({ rate, name, flag });
+        });
     }
 
     navigation(data) {
@@ -82,7 +93,7 @@ class RatePage extends Component {
                     onPress: () => console.log('Cancel Pressed'), 
                     style: 'cancel' },
                     { text: 'OK', 
-                    onPress: () => console.log('OK Pressed') },
+                    onPress: () => this.onSubmitAvail.bind(this)(rate) },
                 ],
                 { cancelable: false }
             )
@@ -91,7 +102,6 @@ class RatePage extends Component {
 
     render() {
         const { post } = this.props;
-        console.log(post);
         return (
         <Container>
         <Content>
@@ -171,12 +181,12 @@ class RatePage extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    const { nameSelected, rating } = state.avail;
-    return { post: state.posts.selected, nameSelected, rating };
+    const { rating } = state.avail;
+    return { post: state.posts.selected, rating };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchPost, availUpdate }, dispatch);
+    return bindActionCreators({ fetchPost, availUpdate, availCreate }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RatePage);

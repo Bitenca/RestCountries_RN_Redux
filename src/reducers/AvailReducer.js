@@ -1,8 +1,7 @@
 import { AVAIL_UPDATE } from '../actions/types';
 
 const INITIAL_STATE = {
-    nameSelected: '',
-    rating: null
+    rating: 'n estrelas'
 };
 
 export default (state = INITIAL_STATE, action) => {

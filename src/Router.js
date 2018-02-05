@@ -14,7 +14,7 @@ const RouterComponent = () => {
                     <Scene key='login' component={LoginForm} hideNavBar />
                     <Scene 
                     title='Todos os Países'  
-                    key='home' component={Home} hideNavBar initial
+                    key='home' component={Home} hideNavBar 
                     />
                 </Scene>
 
