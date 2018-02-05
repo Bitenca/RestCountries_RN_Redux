@@ -10,6 +10,7 @@
     "axios": "^0.17.1",
     "eslint": "^4.16.0",
     "firebase": "^4.9.0",
+    "lodash": "^4.17.5",
     "native-base": "^2.3.7",
     "react": "16.2.0",
     "react-native": "0.52.2",
