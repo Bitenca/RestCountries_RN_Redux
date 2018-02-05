@@ -22,7 +22,7 @@ export default (state = {}, action) => {
         case SEARCH_START:
             return { ...state, name: action.payload };
         case RESET_SEARCH:
-            return { ...state, name: '', search: [] };
+            return { ...state, INITIAL_STATE };
         default:
             return state;
     }
