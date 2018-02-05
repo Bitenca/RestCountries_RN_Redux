@@ -23,7 +23,7 @@ export const resetSearch = () => {
 export const fetchAllPosts = () => {
     return (dispatch) => {
         dispatch({ type: REQUEST_START });
-        axios.get('https://restcountries.eu/rest/v2/name/b')
+        axios.get('https://restcountries.eu/rest/v2/name/united')
         .then((response) => requestSuccess(dispatch, response))
         .catch((error) => console.log(error));
     };
