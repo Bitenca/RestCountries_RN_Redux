@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
-import { fetchAllPosts, fetchPost, searchStart, resetSearch } from '../../actions';
+import { fetchAllPosts, fetchPost, searchStart } from '../../actions';
 import { Spinner } from '../common/Spinner';
 import { SingleItem } from './SingleItem';
 
@@ -26,11 +26,11 @@ class Home extends Component {
     }
 
     searchTermChange(term) {
-        /*if (term === '') {
-            this.props.resetSearch();
+        if (this.props.name === '') {
+            this.props.fetchAllPosts();
             this.loadingPosts(this.props.posts); 
             // if search bar is empty render all countries
-        }*/
+        }
         this.props.searchStart(term);
     }
 
@@ -64,10 +64,11 @@ class Home extends Component {
     }
 
     renderCountries(posts, search) {
-        if (search) {
-            return this.loadingPosts(search);
+        console.log(this.props.name);
+        if (this.props.name === undefined) {
+            return this.loadingPosts(posts);
         }
-        return this.loadingPosts(posts);
+        return this.loadingPosts(search);
     }
 
     render() {
@@ -116,7 +117,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ fetchAllPosts, fetchPost, searchStart, resetSearch }, dispatch);
+    return bindActionCreators({ fetchAllPosts, fetchPost, searchStart }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
