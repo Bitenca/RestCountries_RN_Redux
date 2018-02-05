@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { Container, Content, Card, CardItem, Footer, FooterTab,
 Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { userFetch } from '../../actions';
 
-export default class UserAccount extends Component {
+class UserAccount extends Component {
+  componentWillMount() {
+    this.props.userFetch();
+  }
+
   navigation(data) {
     switch (data) {
         case 'userCountries':
@@ -24,27 +30,20 @@ export default class UserAccount extends Component {
           <Card style={{ flex: 0 }}>
             <CardItem>
               <Left>
-                <Thumbnail source={{ uri: 'Image URL' }} />
+                <Thumbnail source={{ uri: 'https://www.ucas.com/sites/default/files/styles/square_full/public/default_images/default_avatar.png' }} />
                 <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>April 15, 2016</Text>
+                  <Text>{this.props.email}</Text>
+                  <Text note>Usuário Comum</Text>
                 </Body>
               </Left>
             </CardItem>
             <CardItem>
               <Body>
                 <Text>
-                  Your text here
+                  Rest Countries - Avalie Países! 
                 </Text>
+                <Text note>App Criado por Felipe Bittencourt (Bitenca on GitHub)</Text>
               </Body>
-            </CardItem>
-            <CardItem>
-              <Left>
-                <Button transparent textStyle={{ color: '#87838B' }}>
-                  <Icon name="logo-github" />
-                  <Text>1,926 stars</Text>
-                </Button>
-              </Left>
             </CardItem>
           </Card>
         </Content>
@@ -65,3 +64,11 @@ export default class UserAccount extends Component {
       );
     }
 }
+
+const mapStateToProps = state => {
+  const { email } = state.avail;
+
+  return { email };
+};
+
+export default connect(mapStateToProps, { userFetch })(UserAccount);

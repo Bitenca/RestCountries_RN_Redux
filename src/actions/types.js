@@ -21,3 +21,5 @@ export const RESET_SEARCH = 'reset_search';
 export const AVAIL_UPDATE = 'avail_update';
 
 export const AVAIL_FETCH_SUCCESS = 'avail_fetch_success';
+
+export const USER_FETCH_SUCCESS = 'user_fetch_success';

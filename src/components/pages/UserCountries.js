@@ -47,7 +47,6 @@ class UserCountries extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Container>
         <Content>
