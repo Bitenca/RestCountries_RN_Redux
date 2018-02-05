@@ -66,7 +66,7 @@ class Home extends Component {
 
     renderCountries(posts, search) {
         console.log(this.props.name);
-        if (this.props.name === undefined) {
+        if (this.props.name === undefined || this.props.name === '') {
             return this.loadingPosts(posts);
         }
         return this.loadingPosts(search);
