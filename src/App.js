@@ -19,8 +19,9 @@ class App extends Component {
       storageBucket: 'provapraticac.appspot.com',
       messagingSenderId: '744942410926'
     };
-
-    firebase.initializeApp(config);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(config);
+    }
   }
 
   render() {
